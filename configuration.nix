@@ -10,11 +10,6 @@
       ./hardware-configuration.nix
     ];
 
-  # NVIDIA config for hyprland
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true; # open-source
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Use the systemd-boot EFI boot loader.
