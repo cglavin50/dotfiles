@@ -74,11 +74,8 @@
      rofi
      vesktop
      tmux
-     dunst
+     mako
   ];
-
-  # notification daemon toggle
-  services.dunst.enable = true;
 
   fonts.packages = with pkgs; [
      jetbrains-mono
