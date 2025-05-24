@@ -41,6 +41,7 @@
     usbutils
     ethtool
     sysstat
+    lazygit
 
     # nix
     nix-output-monitor
@@ -50,5 +51,9 @@
     enable = true;
     userName = "cglavin50";
     userEmail = "cooperglavin@gmail.com";
+    
+    extraConfig = {
+      push.autoSetupRemote = true;
+    };
   };
 }
