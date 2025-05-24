@@ -34,13 +34,15 @@
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
-  # security.rtkit.enable = true;
-  # services.pipewire = {
-  #  enable = true;
-  #  alsa.enable = true;
-  #  alsa.support32Bit = true;
-  #  pulse.enable = true;
-  #};
+  services.pulseaudio.enable = false; # confirm pulseaudio is off
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
@@ -51,7 +53,7 @@
    packages = with pkgs; [
      tree
    ];
-   };
+  };
 
   programs.firefox.enable = true;
 
@@ -72,7 +74,11 @@
      rofi
      vesktop
      tmux
+     dunst
   ];
+
+  # notification daemon toggle
+  services.dunst.enable = true;
 
   fonts.packages = with pkgs; [
      jetbrains-mono
