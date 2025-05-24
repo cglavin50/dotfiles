@@ -63,4 +63,6 @@
       push.autoSetupRemote = true;
     };
   };
+
+  xdg.configFile."hypr/hyprland.conf".source = ./hyprland/hyprland.conf;
 }
