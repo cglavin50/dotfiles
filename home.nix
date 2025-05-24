@@ -14,7 +14,6 @@
       btw = "echo i use nixos btw";
       rebuild = "sudo nixos-rebuild switch --flake ~/dotfiles#nixos-btw --show-trace --print-build-logs --verbose";
       config = "sudo vim /etc/nixos/configuration.nix";
-      homemanager = "sudo vim /etc/nixos/home.nix";
     };
   };
 

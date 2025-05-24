@@ -17,6 +17,9 @@
 	# import previous config.nix to keep existing system
 	./configuration.nix
 
+	# nvidia config
+	./nvidia.nix
+
 	# make home-manager a module of nixos such that it's deployed automatically on switch
 	home-manager.nixosModules.home-manager
 	{
