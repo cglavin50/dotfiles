@@ -44,6 +44,12 @@
 
     # nix
     nix-output-monitor
+
+    # config
+    mako
+
+    # apps
+    vesktop
   ];
 
   programs.git = {

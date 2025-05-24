@@ -72,9 +72,7 @@
      btop
      pcmanfm
      rofi
-     vesktop
      tmux
-     mako
   ];
 
   fonts.packages = with pkgs; [
