@@ -45,8 +45,10 @@
     # nix
     nix-output-monitor
 
-    # config
+    # general stack
     mako
+    ranger
+    wofi
 
     # apps
     vesktop
