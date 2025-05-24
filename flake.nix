@@ -18,7 +18,7 @@
 	./configuration.nix
 
 	# nvidia config
-	./nvidia.nix
+	./modules/nvidia.nix
 
 	# make home-manager a module of nixos such that it's deployed automatically on switch
 	home-manager.nixosModules.home-manager
@@ -26,7 +26,7 @@
 	  home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
 
-	  home-manager.users.cooper = import ./home.nix;
+	  home-manager.users.cooper = import ./home/home.nix;
 	}
       ];
     };
