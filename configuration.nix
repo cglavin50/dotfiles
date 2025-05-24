@@ -25,13 +25,6 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  services.xserver = {
-    enable = true;
-    windowManager.qtile.enable = true;
-  };
-
   # Enable ssh agent across sessions
   programs.ssh.startAgent = true;
 

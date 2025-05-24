@@ -20,6 +20,9 @@
 	# nvidia config
 	./modules/nvidia.nix
 
+	# hyprland
+	./modules/hyprland.nix
+
 	# make home-manager a module of nixos such that it's deployed automatically on switch
 	home-manager.nixosModules.home-manager
 	{
