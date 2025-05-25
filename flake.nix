@@ -30,6 +30,8 @@
 	  home-manager.useUserPackages = true;
 
 	  home-manager.users.cooper = import ./home/home.nix;
+
+	  home-manager.backupFileExtension = ".backup";
 	}
       ];
     };
