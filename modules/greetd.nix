@@ -13,11 +13,4 @@
       };
     };
   };
-
-  # create greeter users for greetd to run in
-  users.users.greeter = {
-    isSystemUser = true;
-    group = "nogroup";
-    shell = pkgs.bash;
-  };
 }
