@@ -55,6 +55,10 @@
    ];
   };
 
+  # auto-login
+  services.getty.autoLogin.enable = true;
+  services.getty.autoLogin.user = "cooper";
+
   programs.firefox.enable = true;
 
   # allowed unfree, should make this per package #todo

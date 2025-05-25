@@ -23,6 +23,9 @@
 	# hyprland
 	./modules/hyprland.nix
 
+	# greetd DM
+	./modules/greetd.nix
+
 	# make home-manager a module of nixos such that it's deployed automatically on switch
 	home-manager.nixosModules.home-manager
 	{
