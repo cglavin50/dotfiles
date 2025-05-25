@@ -8,7 +8,7 @@
 
     settings = {
       default_session = {
-        command = "${pkgs.greetd.greet}/bin/greet";
+        command = "${pkgs.greetd.greetd}/bin/greet";
         user = "cooper";
       };
     };
