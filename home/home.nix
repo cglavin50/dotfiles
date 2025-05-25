@@ -64,5 +64,10 @@
     };
   };
 
+  programs.tmux = {
+    enable = true;
+    extraConfig = builtins.readFile ./tmux/tmux.conf;
+  };
+
   xdg.configFile."hypr/hyprland.conf".source = ./hyprland/hyprland.conf;
 }
