@@ -50,6 +50,9 @@
     ranger
     wofi
 
+    # hyprland
+    waybar
+
     # apps
     vesktop
   ];
@@ -67,6 +70,14 @@
   programs.tmux = {
     enable = true;
     extraConfig = builtins.readFile ./tmux/tmux.conf;
+  };
+
+  programs.waybar = {
+    enable = true;
+    settings = {
+      mainBar = (builtins.fromJSON (builtins.readFile ./waybar/config.jsonc));
+    };
+    style = (builtins.readFile ./waybar/styles.css);
   };
 
   xdg.configFile."hypr/hyprland.conf".source = ./hyprland/hyprland.conf;
