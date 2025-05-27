@@ -1,42 +1,43 @@
 {
-  description = "My first flake";
+  description = "My first flake, based on Sly-Harvey/NixOS";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
+
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # import other flakes like zen-browser to use
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
-    nixosConfigurations.nixos-btw = nixpkgs.lib.nixosSystem {
+  outputs = { 
+    self, 
+    nixpkgs,
+     ... 
+  } @ inputs: let
+    inherit (self) outputs; # lets us refer to self.outputs as outputs
+    settings = {
+      username = "cooper";
+      editor = "nvim"; # needed? WIP
+      browser = "firefox"; # convert to zen
+      terminal = "kitty";
+
+      # system config
+      hostname = "nixos-btw";
+      timezone = "America/New_York";
+
+      # TODO: generalize
       system = "x86_64-linux";
-      modules = [
-	# import previous config.nix to keep existing system
-	./configuration.nix
-
-	# nvidia config
-	./modules/nvidia.nix
-
-	# hyprland
-	./modules/hyprland.nix
-
-	# greetd DM
-	# ./modules/greetd.nix
-
-	# make home-manager a module of nixos such that it's deployed automatically on switch
-	home-manager.nixosModules.home-manager
-	{
-	  home-manager.useGlobalPkgs = true;
-	  home-manager.useUserPackages = true;
-
-	  home-manager.users.cooper = import ./home/home.nix;
-
-	  home-manager.backupFileExtension = ".backup";
-	}
-      ];
+    };
+  in {
+    nixosConfigurations = {
+      ares = nixpkgs.lib.nixosSystem {
+	system = settings.system;
+	specialArgs = {inherit self inputs outputs;} // settings;
+	modules = [./hosts/ares/configuration.nix];
+      };
     };
   };
 }
