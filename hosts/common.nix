@@ -66,9 +66,7 @@
       # ssh-agent for ssh-keys
       programs.ssh = {
 	enable = true;
-	extraConfig = ''
-	  AddKeysToAgent yes
-	'';
+	addKeysToAgent = "yes";
       };
 
       # default packages that don't require configuration
