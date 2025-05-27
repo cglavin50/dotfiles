@@ -12,7 +12,8 @@
 }: {
   imports = [ 
     inputs.home-manager.nixosModules.home-manager
-    ../modules/hardware/interception-tools.nix
+    ../modules/hardware/interception-tools/interception-tools.nix
+    # ../modules/hardware/interception-tools/default.nix
   ];
 
   users.users.${username} = {
@@ -21,6 +22,8 @@
   };
 
   nixpkgs.config.allowUnfree = true; # move this?
+
+  programs.ssh.startAgent = true;
 
   # common home-manager options for all systems
   home-manager = {
@@ -58,6 +61,14 @@
         extraConfig = {
 	  push.autoSetupRemote = true;
         };
+      };
+
+      # ssh-agent for ssh-keys
+      programs.ssh = {
+	enable = true;
+	extraConfig = ''
+	  AddKeysToAgent yes
+	'';
       };
 
       # default packages that don't require configuration
@@ -99,6 +110,7 @@
 	ranger
 	wofi
 	firefox
+	obsidian
       ];
     };
   };
