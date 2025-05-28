@@ -71,7 +71,7 @@
       programs.ssh = {
 	enable = true;
 	addKeysToAgent = "yes";
-	includes = [ "../modules/programs/ssh/github_ssh_conf" ];
+	includes = [ "~/dotfiles/modules/programs/ssh/github_ssh_conf" ];
       };
 
       # default packages that don't require configuration
