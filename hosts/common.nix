@@ -32,7 +32,11 @@
     backupFileExtension = "backup";
  
     sharedModules = [
-      ../modules/hyprland
+      ../modules/desktop/hyprland # automatically resolves to default.nix
+      ../modules/programs/tmux
+      inputs.nixvim.homeManagerModules.nixvim # pass in homeManager module so nixvim can access
+      ../modules/programs/nixvim
+      ../modules/programs/zsh
     ];   
 
     # for our user
@@ -67,7 +71,7 @@
       programs.ssh = {
 	enable = true;
 	addKeysToAgent = "yes";
-	includes = [ "../modules/ssh/github_ssh_conf" ];
+	includes = [ "../modules/programs/ssh/github_ssh_conf" ];
       };
 
       # default packages that don't require configuration
@@ -98,18 +102,18 @@
 	interception-tools-plugins.caps2esc
 
 	# terminal
-	vim
 	git
 	htop
 	tldr
 	ripgrep
 
-	# todo: remove scaffolding
+	# TODO remove scaffolding
 	kitty
 	ranger
 	wofi
 	firefox
 	obsidian
+	vesktop
       ];
     };
   };
@@ -156,6 +160,8 @@
     jetbrains-mono
     fira-code
   ];
+  programs.zsh.enable = true; # adding this here to prevent error, configured in home-manager
+  users.defaultUserShell = pkgs.zsh; # right place?
 
   # setting defaults for xdg, as apparently xdg doesn't set them before env.variables are set
   environment.sessionVariables = {
