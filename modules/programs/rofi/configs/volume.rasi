@@ -1,0 +1,153 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Rofi Theme File
+ * Rofi Version: 1.7.3
+ **/
+
+ // configured to work with matugen
+
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 false;
+}
+
+/*****----- Global Properties -----*****/
+@import                          "./colors.rasi"
+
+/*
+USE_ICON=NO
+*/
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       400px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      1px solid;
+    border-radius:               12px;
+    border-color:                @primary;
+    cursor:                      "default";
+    background-color:            @surface-container;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     20px;
+    background-color:            transparent;
+    children:                    [ "inputbar", "message", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     0px;
+    border:                      0px;
+    border-radius:               0px;
+    border-color:                @primary;
+    background-color:            transparent;
+    text-color:                  @surface-container-high;
+    children:                    [ "textbox-prompt-colon", "prompt"];
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "";
+    padding:                     10px 13px;
+    border-radius:               12px;
+    background-color:            @error;
+    text-color:                  @on-error;
+}
+prompt {
+    enabled:                     true;
+    padding:                     10px;
+    border-radius:               12px;
+    background-color:            @inverse-primary;
+    text-color:                  @surface-container;
+}
+
+/*****----- Message -----*****/
+message {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     10px;
+    border:                      0px solid;
+    border-radius:               12px;
+    border-color:                @primary-container;
+    background-color:            @surface-container-high;
+    text-color:                  @on-surface;
+}
+textbox {
+    background-color:            inherit;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       6;
+    cycle:                       true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    
+    spacing:                     5px;
+    background-color:            transparent;
+    cursor:                      "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    padding:                     10px;
+    border:                      0px solid;
+    border-radius:               12px;
+    border-color:                @primary-container;
+    background-color:            transparent;
+    text-color:                  @on-primary;
+    cursor:                      pointer;
+}
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color:            @surface-container;
+    text-color:                  @on-surface;
+}
+element normal.urgent,
+element alternate.urgent,
+element selected.active {
+    background-color:            @primary-container;
+    text-color:                  @on-primary-container;
+}
+element normal.active,
+element alternate.active,
+element selected.urgent {
+    background-color:            @error;
+    text-color:                  @on-error-container;
+}
+element selected.normal {
+    background-color:            @inverse-primary;
+    text-color:                  @surface-container;
+}

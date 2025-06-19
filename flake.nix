@@ -9,10 +9,40 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # import other flakes like zen-browser to use
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    matugen = {
+      url = "github:/InioX/Matugen";
+    };
+
+    nixcord = {
+      url = "github:kaylorben/nixcord";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # hyprpanel = {
+    #   url = "github:Jas-SinghFSU/HyprPanel";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    rose-pine-hyprcursor = {
+      url = "github:ndom91/rose-pine-hyprcursor";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zen-nebula = {
+      url = "github:JustAdumbPrsn/Nebula-A-Minimal-Theme-for-Zen-Browser";
+    };
+
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
     };
   };
 
@@ -22,10 +52,11 @@
      ... 
   } @ inputs: let
     inherit (self) outputs; # lets us refer to self.outputs as outputs
+    templates = import ./dev-shell;
     settings = {
       username = "cooper";
-      editor = "nvim"; # needed? WIP
-      browser = "firefox"; # convert to zen
+      EDITOR = "nvim"; # needed? WIP
+      browser = "zen";
       terminal = "kitty";
 
       # system config
@@ -38,9 +69,9 @@
   in {
     nixosConfigurations = {
       ares = nixpkgs.lib.nixosSystem {
-	system = settings.system;
-	specialArgs = {inherit self inputs outputs;} // settings;
-	modules = [./hosts/ares/configuration.nix];
+        system = settings.system;
+        specialArgs = {inherit self inputs outputs;} // settings;
+        modules = [./hosts/ares/configuration.nix];
       };
     };
   };

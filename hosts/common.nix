@@ -9,11 +9,16 @@
   timezone,
   self, 
   ...
-}: {
+}: 
+let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
+in {
   imports = [ 
     inputs.home-manager.nixosModules.home-manager
     ../modules/hardware/interception-tools/interception-tools.nix
     # ../modules/hardware/interception-tools/default.nix
+    ../modules/desktop/greetd
+    ../modules/programs/flameshot
   ];
 
   users.users.${username} = {
@@ -25,23 +30,47 @@
 
   programs.ssh.startAgent = true;
 
+  security.polkit.enable = true;
+
   # common home-manager options for all systems
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
  
+    # TODO - clean this up?
+    extraSpecialArgs = {
+      inherit spicePkgs;
+    };
+    # IMPORT OUR MODULES
     sharedModules = [
       ../modules/desktop/hyprland # automatically resolves to default.nix
+      ../modules/desktop/waybar
       ../modules/programs/tmux
       inputs.nixvim.homeManagerModules.nixvim # pass in homeManager module so nixvim can access
       ../modules/programs/nixvim
       ../modules/programs/zsh
-    ];   
+      inputs.matugen.nixosModules.default
+      ../modules/programs/matugen
+      ../modules/programs/kitty
+      # inputs.nixcord.homeModules.nixcord
+      # ../modules/programs/nixcord
+      # inputs.hyprpanel.homeManagerModules.hyprpanel
+      # ../modules/desktop/hyprpanel
+      ../modules/desktop/dunst
+      # ../modules/desktop/mako
+      inputs.zen-browser.homeModules.beta
+      inputs.zen-nebula.homeModules.default
+      ../modules/programs/zen
+      ../modules/programs/rofi
+      ../modules/programs/ranger
+      inputs.spicetify-nix.homeManagerModules.spicetify
+      # spicePkgs
+      ../modules/programs/spicetify
+      ../modules/programs/cava
+    ]; 
 
     # for our user
-
-
     users.${username} = {pkgs, ...}: {
       # home-manager can install and manage itself
       programs.home-manager.enable = true; 
@@ -52,89 +81,113 @@
       home.homeDirectory = "/home/${username}";
       home.stateVersion = "25.05";
       home.sessionVariables = {
-	editor = "nvim";
-	browser = browser;
-	terminal = terminal;
+        browser = browser;
+        terminal = terminal;
       };
 
-      # personal git config
+# personal git config
       programs.git = {
         enable = true; 
         userName = "cglavin50";
         userEmail = "cooperglavin@gmail.com";
         extraConfig = {
-	  push.autoSetupRemote = true;
+          push.autoSetupRemote = true;
         };
       };
 
-      # ssh-agent for ssh-keys
+# ssh-agent for ssh-keys
       programs.ssh = {
-	enable = true;
-	addKeysToAgent = "yes";
-	includes = [ "~/dotfiles/modules/programs/ssh/github_ssh_conf" ];
+        enable = true;
+        addKeysToAgent = "yes";
+        includes = [ "~/dotfiles/modules/programs/ssh/github_ssh_conf" ];
       };
 
-      # default packages that don't require configuration
+      programs.direnv = {
+        enable = true;
+        enableZshIntegration = true;
+        nix-direnv.enable = true;
+      };
+
+# default packages that don't require configuration
       home.packages = with pkgs; [
-	# archives
-	zip
-	xz
-	unzip
+# archives
+        zip
+          xz
+          unzip
 
-	# networking
-	nmap
-	dnsutils
-	ldns
+# networking
+          nmap
+          dnsutils
+          ldns
 
-	# misc
-	bat
-	btop
-	nnn
-	wget
-	which
-	tree
-	file
-	usbutils
-	ethtool
-	sysstat
+          # audio
+          playerctl
 
-	interception-tools
-	interception-tools-plugins.caps2esc
+# misc
+          bat
+          btop
+          nnn
+          wget
+          which
+          tree
+          file
+          usbutils
+          ethtool
+          sysstat
 
-	# terminal
-	git
-	htop
-	tldr
-	ripgrep
+          interception-tools
+          interception-tools-plugins.caps2esc
 
-	# TODO remove scaffolding
-	kitty
-	ranger
-	wofi
-	firefox
-	obsidian
-	vesktop
-      ];
+# terminal
+          git
+          htop
+          tldr
+          ripgrep
+
+          playerctl
+
+# TODO remove scaffolding
+          firefox
+          obsidian
+# vesktop
+          vesktop
+
+# theming
+          matugen
+          swww
+          inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default # rose-pine hyprcursor from flake
+          nix-prefetch
+          ];
     };
   };
 
-  # bootloader?
-  
+# bootloader?
+
   time.timeZone = timezone;
 
-  # global networking?
+# global networking?
   networking = {
     networkmanager.enable = true;
   };
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk # add GTK support
+    ];
+
+    config = {
+      common = {
+        default = [ "hyprland" "gtk" ];
+      };
+    };
   };
 
-  # login manager? ssdm?
+# login manager? ssdm?
 
-  # sound
+# sound
+  services.dbus.enable = true;
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -143,44 +196,46 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
-    # pipewire configuration manager
+# pipewire configuration manager
     wireplumber = {
       enable = true;
       configPackages = [
-	(pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/11-bluetooth-policy.conf" ''
-	  bluetooth.autoswitch-to-headset-profile = false
-	'')
+        (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/11-bluetooth-policy.conf" ''
+         bluetooth.autoswitch-to-headset-profile = false
+         '')
       ];
     };
   };
 
-  # terminal
-  # change shell here
-  fonts.packages = with pkgs.nerd-fonts; [
-    jetbrains-mono
-    fira-code
+# terminal + fonts
+  fonts.packages = with pkgs; [
+    noto-fonts-emoji
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
   ];
   programs.zsh.enable = true; # adding this here to prevent error, configured in home-manager
-  users.defaultUserShell = pkgs.zsh; # right place?
+    users.defaultUserShell = pkgs.zsh; # right place?
 
-  # setting defaults for xdg, as apparently xdg doesn't set them before env.variables are set
-  environment.sessionVariables = {
-    XDG_CACHE_HOME = "$HOME/.cache";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_BIN_HOME = "$HOME/.local/bin";
+# setting defaults for xdg, as apparently xdg doesn't set them before env.variables are set
+    environment.sessionVariables = {
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_BIN_HOME = "$HOME/.local/bin";
 
-    templates = "${self}/dev-shells";
-  };
+      NIXOS_OZONE_WL = "1";
 
-  # nix
+      templates = "${self}/dev-shells";
+    };
+
+# nix
   programs = {
     nh = {
       enable = true;
-      # automatic garbage collection
+# automatic garbage collection
       clean = {
-	enable = true;
-	extraArgs = "--keep-since 7d --keep 3";
+        enable = true;
+        extraArgs = "--keep-since 7d --keep 3";
       };
       flake = "/home/${username}/dotfiles";
     };

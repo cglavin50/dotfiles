@@ -1,131 +1,92 @@
+@import "colors.css";
+
+/* Universal settings */
 * {
-  font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
-  font-size: 16px;
+  border: none;
   border-radius: 0;
-    min-height: 0;
-      border: none;
-        font-weight: bold;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 14px;
+  min-height: 0;
 }
 
-#workspaces{
-	  background-color: rgba(24,24,37,1.0);
-	    border: none;
-	      box-shadow: none;
-      }
+/* Waybar background and text */
+window#waybar {
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  background-color: transparent;
+  color: @on_surface;            /* Default text color */
+}
 
-      #tray{
-	        margin: 6px 3px;
-		  background-color: rgba(36, 36, 52, 1.0);
-		    padding: 6px 12px; /* 保持内部间距 */
-		      border-radius: 6px;
-		        border-width: 0px;
-		}
+/* Workspaces */
+#workspaces {
+  background-color: @surface_container_high;
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin: 4px;
+}
 
-		#waybar {
-			  background-color: #181825;
-			    transition-property: background-color;
-			      transition-duration: 0.5s;
-		      }
+#workspaces button {
+  all: initial;
+  min-width: 0;
+  box-shadow: inset 0 -3px transparent;
+  padding: 2px 10px;
+  min-height: 0;
+  margin: 4px 4px;
+  border-radius: 8px;
+  padding: 0 8px;
+  color: @on_surface;    /* Inactive workspace text */
+  background: @surface_container;
+}
 
-		      #window,
-		      #clock,
-		      #custom-power,
-		      #custom-reboot,
-		      #bluetooth,
-		      #battery,
-		      #pulseaudio,
-		      #backlight,
-		      #custom-temperature,
-		      #memory,
-		      #cpu,
-		      #network,
-		      #custom-lock{
-			        border-radius: 4px;
-				  margin: 6px 3px;
-				    padding: 6px 12px;
-				      background-color: #1e1e2e;
-				        color: #181825;
-				}
+#workspaces button:hover {
+  background-color: @surface_container_highest;
+  color: @on_surface;
+}
 
-				#clock {
-					  background-color: #89b4fa;
-				  }
-				  #custom-power{
-					    background-color: #f38ba8;
-				    }
-				    #custom-reboot{
-					      background-color: #a6e3a1;
-				      }
-				      #bluetooth{
-					        background-color: #f9e2af;
-					}
-					#battery{
-						  background-color: #cba6f7;
-					  }
-					  #pulseaudio{
-						    background-color: #89dceb;
-					    }
-					    #backlight{
-						      background-color: #a6a3a1;
-					      }
-					      #custom-temperature{
-						        background-color: #74c7ec;
-						}
-						#memory{
-							  background-color: #f7768e;
-						  }
-						  #cpu{
-							    background-color: #f38ba8;
-						    }
-						    #network{
-							      background-color: #fab387;
-						      }
-						      #custom-lock{
-							        background-color: #94e2d5;
-							}
-							#window{
-								  background-color: #74c7ec;
-							  }
+#workspaces button.active {
+  background-color: @primary;
+  color: @on_primary;
+}
 
-							  #waybar.hidden {
-								    opacity: 0.5;
-							    }
+#window {
+  background-color: @surface_container_high;
+  color: @on_surface;
+  padding: 6px 12px;
+  margin: 6px 0;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  min-width: 0;
+}
 
-							    #workspaces button {
-								      all: initial;
-								        /* Remove GTK theme values (waybar #1351) */
-								        min-width: 0;
-									  /* Fix weird spacing in materia (waybar #450) */
-									  box-shadow: inset 0 -3px transparent;
-									    /* Use box-shadow instead of border so the text isn't offset */
-									    padding: 6px 18px;
-									      margin: 6px 3px;
-									        border-radius: 4px;
-										  background-color: rgba(36, 36, 52, 1.0);
-										    color: #cdd6f4;
-									    }
+/* Tray */
+#tray {
+  padding: 0 10px;
+  background: @surface_container_high;
+  color: @on_surface_variant;
+}
 
-									    #workspaces button.active {
-										      color: #1e1e2e;
-										        background-color: #cdd6f4;
-										}
+/* Tooltip */
+tooltip {
+  background: @surface_container;
+  color: @on_surface;
+  border-radius: 8px;
+  padding: 6px;
+}
 
-										#workspaces button:hover {
-											  box-shadow: inherit;
-											    text-shadow: inherit;
-											      color: #1e1e2e;
-											        background-color: #cdd6f4;
-											}
+#window {
+  color: @primary;
+}
 
-											tooltip {
-												  border-radius: 8px;
-												    padding: 16px;
-												      background-color: #131822;
-												        color: #C0C0C0;
-												}
-
-												tooltip label {
-													  padding: 5px;
-													    background-color: #131822;
-													      color: #C0C0C0;
-												      }
+#mpris,
+#privacy,
+#pulseaudio,
+#network,
+#clock {
+  min-height: 0;
+  padding: 2px 10px;
+  border-radius: 8px;
+  margin: 3px 3px;
+  background: @surface_container_high;
+  color: @primary;
+}
