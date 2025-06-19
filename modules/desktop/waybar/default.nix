@@ -72,10 +72,10 @@
           };
         };
         mpris = {
-          format = "{player_icon}  {artist}:{title}";
+          format = "{player_icon}  {artist} : {title}";
           format-paused = "{player_icon} - {status_icon}  {artist}:{title}";
-          on-scroll-up = "waybar -mpris --send player-next";
-          on-scroll-down = "waybar -mpris --send player-prev";
+          on-scroll-up = "playerctl next";
+          on-scroll-down = "playerctl previous";
           artist-len = 10;
           title-len = 20;
           player-icons = {

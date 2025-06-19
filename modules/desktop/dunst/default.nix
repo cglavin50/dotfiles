@@ -9,7 +9,6 @@
   ];
 
   services.dunst = {
-    enable = true;
-    # configFile = "~/.config/dunst/matugen";
+    enable = true; # managing conf file on execute due to matugen dynamically creating
   };
 }
