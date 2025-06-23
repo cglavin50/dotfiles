@@ -32,6 +32,8 @@ in {
 
   security.polkit.enable = true;
 
+  security.pam.services.hyprlock = {}; # for hyprlock support
+
   # common home-manager options for all systems
   home-manager = {
     useGlobalPkgs = true;
@@ -68,6 +70,7 @@ in {
       # spicePkgs
       ../modules/programs/spicetify
       ../modules/programs/cava
+      ../modules/desktop/hyprlock
     ]; 
 
     # for our user

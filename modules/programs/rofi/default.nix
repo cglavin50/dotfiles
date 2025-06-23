@@ -6,11 +6,13 @@
   programs.rofi = {
     enable = true;
     modes = [ "drun" ];
-    theme = ./configs/launcher.rasi;
+    theme = ./themes/launcher.rasi; # define default theme for app launcher
   };
 
   home.packages = with pkgs; [
     rofi-pulse-select
   ];
-  xdg.configFile."rofi/volume.rasi".source = ./configs/volume.rasi;
+
+  xdg.configFile."rofi/themes".source = ./configs;
+  xdg.configFile."rofi/scripts".source = ./scripts;
 }
