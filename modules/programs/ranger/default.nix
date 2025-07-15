@@ -6,13 +6,12 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
-  };  
+  };
 
   programs.ranger = {
     enable = true;
 
-
-    plugins = [ 
+    plugins = [
       {
         name = "devicons";
         src = pkgs.fetchFromGitHub {
@@ -30,15 +29,24 @@
       "zh" = "set show_hidden!";
     };
 
+    rifle = [
+      {
+        # PDF
+        condition = "ext pdf";
+        command = "zen \"$@\"";
+      }
+      {
+        # text
+        condition = "mime ^text/";
+        command = "nvim \"$@\"";
+      }
+    ];
+
     extraConfig = ''
       default_linemode devicons
 
       set preview_images true
       set preview_images_method kitty
-
-      mime ^text, has nvim, X, flag f = nvim -- "$@"
-
-      mime ^text, has vim, X, flag f = vim -- "$@"
     '';
   };
 }

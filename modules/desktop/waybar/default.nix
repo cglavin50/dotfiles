@@ -8,14 +8,15 @@
     enable = true;
     style = ./styles.css; # should import matugen theme
 
-      settings = [{ 
+    settings = [
+      {
         margin-top = 5;
         margin-left = 10;
         margin-right = 10;
         layer = "top";
         name = "top-bar";
         position = "top";
-        modules-left = [ 
+        modules-left = [
           "mpris"
           "pulseaudio"
         ];
@@ -68,7 +69,7 @@
             phone = " ";
             portable = " ";
             car = " ";
-            default = [ "" " " " " ];
+            default = ["" " " " "];
           };
         };
         mpris = {
@@ -106,15 +107,16 @@
           icon-size = 12;
           spacing = 10;
         };
-      }];
+      }
+    ];
   };
 
   # start using systemd - was getting stability issues when launching from hyprland
   systemd.user.services.waybar = {
     Unit = {
       Description = "Waybar status bar";
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
+      After = ["graphical-session.target"];
+      PartOf = ["graphical-session.target"];
     };
 
     Service = {
@@ -124,7 +126,7 @@
     };
 
     Install = {
-      WantedBy = [ "default.target" ];
+      WantedBy = ["default.target"];
     };
   };
   # systemd.user.services.waybar = {

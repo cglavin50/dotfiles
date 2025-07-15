@@ -28,3 +28,7 @@ post_hook = 'pkill dunst && dunst -conf ~/.config/dunst/matugen-themed &'
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi-template.rasi'
 output_path = '~/.config/rofi/colors.rasi'
+
+[templates.wofi]
+input_path = '~/.config/matugen/templates/wofi.css'
+output_path = '~/.config/wofi/themes/launcher.css'

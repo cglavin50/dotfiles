@@ -4,7 +4,7 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    (flameshot.override { enableWlrSupport = true; })
+    (flameshot.override {enableWlrSupport = true;})
   ];
 
   # programs.flameshot = {

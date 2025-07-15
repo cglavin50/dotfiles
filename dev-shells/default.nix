@@ -1,6 +1,6 @@
 rec {
   node = {
     path = ./node;
-    description = "NodeJS development environment"; 
+    description = "NodeJS development environment";
   };
 }

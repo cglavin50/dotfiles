@@ -5,6 +5,5 @@
 }: {
   programs.cava = {
     enable = true;
-
   };
 }

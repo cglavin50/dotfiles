@@ -11,7 +11,7 @@
     settings = {
       theme.font = {
         name = "JetBrains Mono";
-	size = "16px";
+        size = "16px";
       };
     };
   };

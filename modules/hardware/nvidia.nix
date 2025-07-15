@@ -1,6 +1,10 @@
-{ pkgs, config, lib, inputs, ... }:
-
 {
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}: {
   # Enable OpenGL
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;

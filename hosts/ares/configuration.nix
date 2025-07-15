@@ -1,23 +1,21 @@
-{ 
+{
   pkgs,
   hostname,
   browser,
   editor,
   terminal,
-  ... 
-}:
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    ../common.nix
 
-      ../common.nix
-
-      # modules
-      ../../modules/hardware/nvidia.nix
-      ../../modules/programs/steam
-    ];
+    # modules
+    ../../modules/hardware/nvidia.nix
+    ../../modules/programs/steam
+  ];
 
   # Use the systemd-boot EFI boot loader. Move to common?
   boot.loader.systemd-boot.enable = true;
@@ -31,10 +29,10 @@
   services.blueman.enable = true;
 
   networking.hostName = hostname;
-  networking.nameservers = [ 
+  networking.nameservers = [
     "192.168.1.10"
     "1.1.1.1"
-    "8.8.8.8" 
+    "8.8.8.8"
   ]; # use homelab on this machine
   networking.networkmanager.dns = "none"; # prevent NM from overriding adguard DNS
 

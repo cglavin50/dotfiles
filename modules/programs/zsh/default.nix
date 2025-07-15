@@ -15,11 +15,11 @@
     oh-my-zsh = {
       enable = true;
       plugins = [
-	"git"
-	"gitignore"
-	"colored-man-pages"
-	"command-not-found"
-	"sudo"
+        "git"
+        "gitignore"
+        "colored-man-pages"
+        "command-not-found"
+        "sudo"
       ];
       theme = "robbyrussell";
     };

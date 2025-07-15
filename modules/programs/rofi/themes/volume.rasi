@@ -12,6 +12,7 @@
 /*****----- Configuration -----*****/
 configuration {
     show-icons:                 false;
+    enable-vim-mode:		true;
 }
 
 /*****----- Global Properties -----*****/

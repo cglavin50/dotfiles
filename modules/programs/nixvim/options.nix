@@ -1,6 +1,6 @@
 {
   programs.nixvim = {
-  globals = {
+    globals = {
       # Disable useless providers
       loaded_ruby_provider = 0; # Ruby
       loaded_perl_provider = 0; # Perl
@@ -35,4 +35,3 @@
     };
   };
 }
-

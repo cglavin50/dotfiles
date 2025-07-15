@@ -5,13 +5,14 @@
 }: {
   imports = [
     ./options.nix
-      ./completion.nix
+    ./completion.nix
 
-      ./plugins/which-key.nix
-      ./plugins/telescope.nix
-      ./plugins/mini.nix
-      ./plugins/conform.nix
-      ./plugins/todo.nix
+    ./plugins/which-key.nix
+    ./plugins/telescope.nix
+    ./plugins/mini.nix
+    ./plugins/conform.nix
+    ./plugins/todo.nix
+    ./plugins/lspconfig.nix
   ];
 
   programs.nixvim = {
@@ -30,30 +31,30 @@
       };
     };
 
-# theme
+    # theme
     colorschemes.catppuccin.enable = true;
 
     globals.mapleader = " ";
     globals.maplocalleader = " ";
 
     keymaps = [
-    {
-      mode = "n";
-      key = "<leader>E";
-      action = ":Ex<CR>";
-      options = {
-        silent = true;
-        noremap = true;
-      };
-    }
+      {
+        mode = "n";
+        key = "<leader>E";
+        action = ":Ex<CR>";
+        options = {
+          silent = true;
+          noremap = true;
+        };
+      }
     ];
 
-# misc plugins
+    # misc plugins
     plugins = {
       treesitter = {
         enable = true;
         settings = {
-          ensure_installed = [ "nix" "yaml" ];
+          ensure_installed = ["nix" "yaml"];
         };
       };
       web-devicons.enable = true; # icons for plugins to use in ui
@@ -82,11 +83,11 @@
     '';
   };
 
-# packages required by nvim
+  # packages required by nvim
   home.packages = with pkgs; [
     clang
-      ripgrep
-      fd
-      nodejs
+    ripgrep
+    fd
+    nodejs
   ];
 }

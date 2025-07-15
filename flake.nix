@@ -44,12 +44,17 @@
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
     };
+
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { 
-    self, 
+  outputs = {
+    self,
     nixpkgs,
-     ... 
+    ...
   } @ inputs: let
     inherit (self) outputs; # lets us refer to self.outputs as outputs
     templates = import ./dev-shell;

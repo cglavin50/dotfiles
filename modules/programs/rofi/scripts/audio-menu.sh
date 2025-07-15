@@ -62,7 +62,7 @@ sources=$(wpctl status | awk '
 
 media=$(playerctl metadata --format "{{artist}} - {{title}}" 2>/dev/null || echo "No media playing")
 
-selection=$(echo "$sinks" | rofi -dmenu -p "Select Audio Sink" -theme ../configs/volume.rasi)
+selection=$(echo "$sinks" | rofi -dmenu -p "Select Audio Sink" -theme ~/.config/rofi/themes/volume.rasi)
 echo "$selection"
 sink_id=$(echo "$selection" | sed 's/^\([0-9]\+\)\..*$/\1/')
 echo "$sink_id"

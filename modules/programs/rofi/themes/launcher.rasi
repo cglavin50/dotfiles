@@ -9,17 +9,16 @@ configuration {
   modi: "drun";
   show-icons: true;
   display-drun:               "";
-	drun-display-format:        "{name}";
+  drun-display-format:        "{name}";
 }
+
+
 /*****----- Main Window -----*****/
 window {
     transparency:                "real";
-    // location:                    center;
-    // anchor:                      center;
     fullscreen:                  false;
-    // width:                       1000px;
-    // x-offset:                    0px;
-    // y-offset:                    0px;
+    width:			 30%;
+    location:			 center;
 
     enabled:                     true;
     margin:                      0px;

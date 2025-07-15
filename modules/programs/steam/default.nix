@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
@@ -13,8 +10,7 @@
   ];
 
   environment.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-      ''~/.steam/root/compatibilitytools.d'';
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = ''~/.steam/root/compatibilitytools.d'';
   };
 
   programs.gamemode.enable = true;
