@@ -127,6 +127,7 @@ in {
         playerctl
 
         # misc
+        jq
         bat
         btop
         nnn
@@ -138,12 +139,17 @@ in {
         ethtool
         sysstat
 
+        # surely there's a better way to do this
         inputs.quickshell.packages.${pkgs.system}.default
+
+        tree-sitter
 
         papirus-icon-theme
 
         interception-tools
         interception-tools-plugins.caps2esc
+
+        bitwarden-desktop
 
         # terminal
         git

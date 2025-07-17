@@ -33,6 +33,6 @@
   home.packages = with pkgs; [
     alejandra
     nil
-    qttools # provides qmlls
+    qt6.full # provides qmlls access. TODO: figure out how to narrow this down
   ];
 }
