@@ -18,6 +18,10 @@
             };
           };
           tflint.enable = true;
+          qmlls = {
+            enable = true;
+            cmd = ["qmlls" "-E"];
+          };
         };
       };
 
@@ -29,5 +33,6 @@
   home.packages = with pkgs; [
     alejandra
     nil
+    qttools # provides qmlls
   ];
 }

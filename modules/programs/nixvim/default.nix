@@ -13,6 +13,7 @@
     ./plugins/conform.nix
     ./plugins/todo.nix
     ./plugins/lspconfig.nix
+    ./plugins/treesitter.nix
   ];
 
   programs.nixvim = {
