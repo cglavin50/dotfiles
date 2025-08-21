@@ -29,7 +29,10 @@
           "json"
           "latex"
         ];
-        highlight.enable = true;
+        highlight = {
+          enable = true;
+          disable = ["latex"]; # allegedly vimtex provides better coloration that treesitter
+        };
       };
     };
   };

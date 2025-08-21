@@ -7,6 +7,7 @@
     ./options.nix
     ./completion.nix
 
+    ./plugins/autopairs.nix
     ./plugins/which-key.nix
     ./plugins/telescope.nix
     ./plugins/mini.nix
@@ -14,6 +15,7 @@
     ./plugins/todo.nix
     ./plugins/lspconfig.nix
     ./plugins/treesitter.nix
+    ./plugins/latex.nix
   ];
 
   programs.nixvim = {
@@ -33,7 +35,28 @@
     };
 
     # theme
-    colorschemes.catppuccin.enable = true;
+    # colorschemes.nightfox = {
+    #   enable = true;
+    #   flavor = "duskfox";
+    # };
+    colorschemes.rose-pine = {
+      enable = true;
+      settings = {
+        variant = "moon";
+        extend_background_behind_borders = true;
+      };
+    };
+    # colorschemes.dracula-nvim.enable = true;
+    # colorschemes.catppuccin.enable = true;
+    # colorschemes.everforest.enable = true;
+    # colorschemes.kanagawa.enable = true;
+    # colorschemes.tokyonight = {
+    #   enable = true;
+    #   settings = {
+    #     transparent = true;
+    #     style = "moon";
+    #   };
+    # };
 
     globals.mapleader = " ";
     globals.maplocalleader = " ";

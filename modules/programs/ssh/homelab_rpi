@@ -1,0 +1,5 @@
+Host rpi
+HostName 192.168.1.10
+User cglavin50
+IdentityFile ~/.ssh/rpi
+IdentitiesOnly yes

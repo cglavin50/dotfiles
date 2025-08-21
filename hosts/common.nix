@@ -102,7 +102,10 @@ in {
       programs.ssh = {
         enable = true;
         addKeysToAgent = "yes";
-        includes = ["~/dotfiles/modules/programs/ssh/github_ssh_conf"];
+        includes = [
+          "~/dotfiles/modules/programs/ssh/github_ssh_conf"
+          "~/dotfiles/modules/programs/ssh/homelab_rpi"
+        ];
       };
 
       programs.direnv = {
@@ -112,6 +115,7 @@ in {
       };
 
       # default packages that don't require configuration
+      # GENERAL PACKAGES
       home.packages = with pkgs; [
         # archives
         zip
@@ -125,6 +129,8 @@ in {
 
         # audio
         playerctl
+
+        zenity
 
         # misc
         jq
@@ -170,6 +176,9 @@ in {
         swww
         inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default # rose-pine hyprcursor from flake
         nix-prefetch
+
+        # games?
+        osu-lazer
       ];
     };
   };

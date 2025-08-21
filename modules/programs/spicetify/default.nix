@@ -20,4 +20,8 @@
     theme = spicePkgs.themes.catppuccin;
     colorScheme = "mocha";
   };
+
+  # home.packages = with pkgs; [
+  #   spotify-tui # including spotify-tui here for management
+  # ];
 }

@@ -22,6 +22,8 @@
             enable = true;
             cmd = ["qmlls" "-E"];
           };
+          texlab.enable = true;
+          gopls.enable = true;
         };
       };
 
@@ -32,6 +34,7 @@
 
   home.packages = with pkgs; [
     alejandra
+    gopls
     nil
     qt6.full # provides qmlls access. TODO: figure out how to narrow this down
   ];
