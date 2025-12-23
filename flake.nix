@@ -78,6 +78,11 @@
         specialArgs = {inherit self inputs outputs;} // settings;
         modules = [./hosts/ares/configuration.nix];
       };
+      xps = nixpkgs.lib.nixosSystem {
+        system = settings.system;
+	specialArgs = {inherit self inputs outputs;} // settings;
+	modules = [./hosts/xps/configuration.nix];
+      };
     };
   };
 }

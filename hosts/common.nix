@@ -31,7 +31,7 @@ in {
 
   security.polkit.enable = true;
 
-  security.pam.services.hyprlock = {}; # for hyprlock support
+  # security.pam.services.hyprlock = {}; # for hyprlock support
 
   # common home-manager options for all systems
   home-manager = {
@@ -45,7 +45,7 @@ in {
     };
     # IMPORT OUR MODULES
     sharedModules = [
-      ../modules/desktop/hyprland # automatically resolves to default.nix
+      # ../modules/desktop/hyprland # automatically resolves to default.nix
       ../modules/desktop/waybar
       ../modules/programs/tmux
       inputs.nixvim.homeManagerModules.nixvim # pass in homeManager module so nixvim can access
@@ -70,7 +70,7 @@ in {
       # spicePkgs
       ../modules/programs/spicetify
       ../modules/programs/cava
-      ../modules/desktop/hyprlock
+      # ../modules/desktop/hyprlock
     ];
 
     # for our user
@@ -174,7 +174,7 @@ in {
         # theming
         matugen
         swww
-        inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default # rose-pine hyprcursor from flake
+        # inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default # rose-pine hyprcursor from flake
         nix-prefetch
 
         # games?
@@ -192,19 +192,19 @@ in {
     networkmanager.enable = true;
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-gtk # add GTK support
-    ];
-
-    config = {
-      common = {
-        default = ["hyprland" "gtk"];
-      };
-    };
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = with pkgs; [
+  #     xdg-desktop-portal-hyprland
+  #     xdg-desktop-portal-gtk # add GTK support
+  #   ];
+  #
+  #   config = {
+  #     common = {
+  #       default = ["hyprland" "gtk"];
+  #     };
+  #   };
+  # };
 
   # login manager? ssdm?
 
