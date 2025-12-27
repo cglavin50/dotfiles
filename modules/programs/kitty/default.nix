@@ -20,8 +20,10 @@
     };
 
     # matugen theme
+    #  include colors.conf
     extraConfig = ''
-      include colors.conf
+      include dank-tabs.conf
+      include dank-theme.conf
     '';
   };
 }

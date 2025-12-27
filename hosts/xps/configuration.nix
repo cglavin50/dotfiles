@@ -1,14 +1,14 @@
 {
-pkgs,
-hostname,
-...
+  pkgs,
+  hostname,
+  ...
 }: {
-	imports = [
-		./hardware-configuration.nix
-		../common.nix
-	];
+  imports = [
+    ./hardware-configuration.nix
+    ../common.nix
+  ];
 
-	# Use the systemd-boot EFI boot loader. Move to common?
+  # Use the systemd-boot EFI boot loader. Move to common?
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -16,6 +16,8 @@ hostname,
   hardware.bluetooth.powerOnBoot = true;
 
   services.blueman.enable = true;
+
+  services.upower.enable = true;
 
   networking.hostName = hostname;
   networking.nameservers = [
@@ -27,14 +29,14 @@ hostname,
   environment.systemPackages = with pkgs; [
     vim
   ];
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 
   # Enable GNOME
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  # services.xserver.xkb = {
+  #   layout = "us";
+  #   variant = "";
+  # };
 }

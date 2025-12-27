@@ -16,8 +16,11 @@ in {
     inputs.home-manager.nixosModules.home-manager
     ../modules/hardware/interception-tools/interception-tools.nix
     # ../modules/hardware/interception-tools/default.nix
-    ../modules/desktop/greetd
+    # ../modules/desktop/greetd
+    ../modules/desktop/dms/greeter.nix
     ../modules/programs/flameshot
+    ../modules/desktop/niri/system.nix
+    ../modules/programs/thunar
   ];
 
   users.users.${username} = {
@@ -25,13 +28,30 @@ in {
     extraGroups = ["wheel"]; # enable 'sudo'
   };
 
+  users.users.noah = {
+    isNormalUser = true;
+    extraGroups = ["wheel"]; # enable 'sudo'
+  };
+
   nixpkgs.config.allowUnfree = true; # move this?
 
-  programs.ssh.startAgent = true;
+  # programs.ssh.startAgent = true;
 
   security.polkit.enable = true;
 
   # security.pam.services.hyprlock = {}; # for hyprlock support
+
+  # xdg setup for wm
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portag"
+  ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+  };
 
   # common home-manager options for all systems
   home-manager = {
@@ -45,10 +65,23 @@ in {
     };
     # IMPORT OUR MODULES
     sharedModules = [
-      # ../modules/desktop/hyprland # automatically resolves to default.nix
-      ../modules/desktop/waybar
+      # ../modules/desktop/hyprland
+      ../modules/desktop/niri
+      inputs.niri.homeModules.niri
+
+      # ../modules/desktop/noctalia
+      # inputs.noctalia.homeModules.default
+
+      ../modules/programs/nautilus
+
+      ../modules/desktop/dms
+      inputs.dms.homeModules.dankMaterialShell.default
+      inputs.danksearch.homeModules.dsearch
+      inputs.dms.homeModules.dankMaterialShell.niri
+
+      # ../modules/desktop/waybar
       ../modules/programs/tmux
-      inputs.nixvim.homeManagerModules.nixvim # pass in homeManager module so nixvim can access
+      inputs.nixvim.homeModules.nixvim # pass in homeManager module so nixvim can access
       ../modules/programs/nixvim
       ../modules/programs/zsh
       inputs.matugen.nixosModules.default
@@ -82,7 +115,7 @@ in {
 
       home.username = username;
       home.homeDirectory = "/home/${username}";
-      home.stateVersion = "25.05";
+      home.stateVersion = "25.11";
       home.sessionVariables = {
         browser = browser;
         terminal = terminal;
@@ -145,8 +178,10 @@ in {
         ethtool
         sysstat
 
+        fuzzel # launcher
+
         # surely there's a better way to do this
-        inputs.quickshell.packages.${pkgs.system}.default
+        # inputs.quickshell.packages.${pkgs.system}.default
 
         tree-sitter
 
@@ -158,6 +193,7 @@ in {
         bitwarden-desktop
 
         # terminal
+        alacritty # many wms use as default
         git
         htop
         tldr
@@ -209,6 +245,8 @@ in {
   # login manager? ssdm?
 
   # sound
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
   services.dbus.enable = true;
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -231,7 +269,7 @@ in {
 
   # terminal + fonts
   fonts.packages = with pkgs; [
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
   ];
@@ -264,11 +302,14 @@ in {
   };
   nix = {
     settings = {
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       warn-dirty = false;
     };
     optimise.automatic = true;
     package = pkgs.nixVersions.latest;
   };
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }

@@ -24,6 +24,7 @@
           };
           texlab.enable = true;
           gopls.enable = true;
+          ansiblels.enable = false;
         };
       };
 
@@ -36,6 +37,6 @@
     alejandra
     gopls
     nil
-    qt6.full # provides qmlls access. TODO: figure out how to narrow this down
+    # qt6.full # provides qmlls access. TODO: figure out how to narrow this down
   ];
 }

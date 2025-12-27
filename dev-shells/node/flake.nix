@@ -1,7 +1,7 @@
 {
   description = "Flake for nodeJS-23 development, inspired from SlyHarvey repo";
 
-  inputs.nixpkgs.url = "nixpkgs/nixos-25.05";
+  inputs.nixpkgs.url = "nixpkgs/nixos-25.11";
 
   outputs = {
     self,
