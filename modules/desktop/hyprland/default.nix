@@ -14,6 +14,7 @@
 
   home.packages = with pkgs; [
     hyprpolkitagent
+    hyprshot # installing here, manages screenshots
     # hyprpaper
   ];
 }

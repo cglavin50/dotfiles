@@ -16,6 +16,7 @@
     ./plugins/lspconfig.nix
     ./plugins/treesitter.nix
     ./plugins/latex.nix
+    ./plugins/typst.nix
   ];
 
   programs.nixvim = {
@@ -66,6 +67,24 @@
         mode = "n";
         key = "<leader>E";
         action = ":Ex<CR>";
+        options = {
+          silent = true;
+          noremap = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "k";
+        action = "gk";
+        options = {
+          silent = true;
+          noremap = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "j";
+        action = "gj";
         options = {
           silent = true;
           noremap = true;

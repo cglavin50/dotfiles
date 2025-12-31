@@ -30,8 +30,7 @@
           lua = ["stylua"];
           nix = ["alejandra"];
           # Conform can also run multiple formatters sequentially
-          # python = [ "isort "black" ];
-          #
+          python = ["isort" "black"];
           # You can use a sublist to tell conform to run *until* a formatter
           # is found
           # javascript = [ [ "prettierd" "prettier" ] ];

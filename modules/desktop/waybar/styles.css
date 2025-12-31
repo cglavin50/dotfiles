@@ -14,7 +14,7 @@ window#waybar {
   transition-property: background-color;
   transition-duration: 0.5s;
   background-color: transparent;
-  color: @on_surface;            /* Default text color */
+  color: @on_surface; /* Default text color */
 }
 
 /* Workspaces */
@@ -34,7 +34,7 @@ window#waybar {
   margin: 4px 4px;
   border-radius: 8px;
   padding: 0 8px;
-  color: @on_surface;    /* Inactive workspace text */
+  color: @on_surface; /* Inactive workspace text */
   background: @surface_container;
 }
 

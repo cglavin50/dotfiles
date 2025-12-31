@@ -71,6 +71,8 @@ in {
       ../modules/programs/spicetify
       ../modules/programs/cava
       ../modules/desktop/hyprlock
+      ../modules/programs/aider-chat # manages our aider config
+      inputs.agenix.homeManagerModules.default
     ];
 
     # for our user
@@ -163,10 +165,14 @@ in {
         tldr
         ripgrep
 
+        clonehero
+
         playerctl
 
-        # TODO remove scaffolding
+        # browsers
         firefox
+        google-chrome # for coding assessments
+
         obsidian
         # vesktop
         vesktop

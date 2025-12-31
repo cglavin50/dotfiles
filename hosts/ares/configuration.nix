@@ -1,9 +1,7 @@
 {
   pkgs,
   hostname,
-  browser,
-  editor,
-  terminal,
+  username,
   ...
 }: {
   imports = [
@@ -15,6 +13,7 @@
     # modules
     ../../modules/hardware/nvidia.nix
     ../../modules/programs/steam
+    ../../modules/programs/home-assistant
   ];
 
   # Use the systemd-boot EFI boot loader. Move to common?
@@ -28,9 +27,19 @@
 
   services.blueman.enable = true;
 
+  # security.pki.certificates = [
+  #   (builtins.readFile /home/cooper/caddy.crt) # trust Caddy intermediate cert
+  # ];
+
+  # If on WiFi
+  networking.networkmanager.enable = true;
+  users.users.${username}.extraGroups = [
+    "networkmanager"
+  ];
+
   networking.hostName = hostname;
   networking.nameservers = [
-    "192.168.1.10"
+    # "192.168.1.10"
     "1.1.1.1"
     "8.8.8.8"
   ]; # use homelab on this machine
