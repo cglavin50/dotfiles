@@ -35,7 +35,8 @@
     };
     shellAliases = {
       ll = "${pkgs.eza}/bin/eza -lha --icons=auto --sort=name --group-directories-first"; # long list all (stole from model repo)
-      rebuild = "sudo nixos-rebuild switch --flake ~/dotfiles#ares";
+      rebuild-ares = "sudo nixos-rebuild switch --flake ~/dotfiles#ares";
+      rebuild-xps = "sudo nixos-rebuild switch --flake ~/dotfiles#xps";
       dots = "cd ~/dotfiles && tmux";
     };
   };

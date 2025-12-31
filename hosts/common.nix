@@ -18,7 +18,7 @@ in {
     # ../modules/hardware/interception-tools/default.nix
     # ../modules/desktop/greetd
     ../modules/desktop/dms/greeter.nix
-    ../modules/programs/flameshot
+    # ../modules/programs/flameshot
     ../modules/desktop/niri/system.nix
     ../modules/programs/thunar
   ];
@@ -34,12 +34,7 @@ in {
   };
 
   nixpkgs.config.allowUnfree = true; # move this?
-
-  # programs.ssh.startAgent = true;
-
   security.polkit.enable = true;
-
-  # security.pam.services.hyprlock = {}; # for hyprlock support
 
   # xdg setup for wm
   environment.pathsToLink = [
@@ -50,6 +45,15 @@ in {
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
+    ];
+  };
+
+  # tailscale enabled for homelab
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+    extraUpFlags = [
+      "--accept-routes"
     ];
   };
 
@@ -163,6 +167,12 @@ in {
         # audio
         playerctl
 
+        # video
+        ffmpeg
+        wf-recorder
+        vlc
+        mpv
+
         zenity
 
         # misc
@@ -198,6 +208,8 @@ in {
         htop
         tldr
         ripgrep
+        kubectl
+        helm
 
         playerctl
 

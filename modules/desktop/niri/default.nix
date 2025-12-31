@@ -75,20 +75,24 @@
         "Ctrl+J".action = focus-workspace-down;
         "Ctrl+K".action = focus-workspace-up;
 
+        "Ctrl+Shift+H".action = move-column-left;
+        "Ctrl+Shift+L".action = move-column-right;
+        "Ctrl+Shift+J".action = move-window-down;
+        "Ctrl+Shift+K".action = move-window-up;
+
         "Super+Minus".action = set-column-width "-10%";
-        "Super+Plus".action = set-column-width "+10%";
+        "Super+Equal".action = set-column-width "+10%";
         "Super+Shift+Minus".action = set-window-height "-10%";
-        "Super+Shift+Plus".action = set-window-height "+10%";
+        "Super+Shift+Equal".action = set-window-height "+10%";
 
         "Super+Shift+S".action = sh "dms screenshot";
+        "Super+T".action = sh "dms ipc call dash toggle \"media\"";
+        "Super+Comma".action = sh "dms ipc call settings toggle";
         "Ctrl+Alt+Delete".action = sh "dms ipc lock lock";
+        "Super+Shift+R".action =
+          sh "wf-recorder -f ${config.home.homeDirectory}/Videos/recording-$(date +%Y%m%d-%H%M%S).mp4";
+        "Super+Shift+M".action = sh "dms ipc call theme toggle";
       };
     };
   };
-
-  # home.activation.niriTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
-  #   if [ -f ~/.config/niri/config.kdl ]; then
-  #     include dms/*.kdl >> ~/.config/niri/config.kdl
-  #   fi
-  # '';
 }
