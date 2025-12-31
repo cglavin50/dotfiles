@@ -34,6 +34,7 @@
           };
         };
         keymaps = {
+          ansiblels.enable = false;
         };
       };
 
@@ -49,6 +50,6 @@
     isort
     gopls
     nil
-    qt6.full # provides qmlls access. TODO: figure out how to narrow this down
+    # qt6.full # provides qmlls access. TODO: figure out how to narrow this down
   ];
 }

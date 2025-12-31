@@ -1,45 +1,26 @@
 {
   pkgs,
   hostname,
-  username,
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-
     ../common.nix
-
-    # modules
-    ../../modules/hardware/nvidia.nix
-    ../../modules/programs/steam
-    ../../modules/programs/home-assistant
   ];
 
   # Use the systemd-boot EFI boot loader. Move to common?
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  powerManagement.cpuFreqGovernor = "performance";
-
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
   services.blueman.enable = true;
 
-  # security.pki.certificates = [
-  #   (builtins.readFile /home/cooper/caddy.crt) # trust Caddy intermediate cert
-  # ];
-
-  # If on WiFi
-  networking.networkmanager.enable = true;
-  users.users.${username}.extraGroups = [
-    "networkmanager"
-  ];
+  services.upower.enable = true;
 
   networking.hostName = hostname;
   networking.nameservers = [
-    # "192.168.1.10"
     "1.1.1.1"
     "8.8.8.8"
   ]; # use homelab on this machine

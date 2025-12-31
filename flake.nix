@@ -2,15 +2,16 @@
   description = "My first flake, based on Sly-Harvey/NixOS";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs.url = "nixpkgs/nixos-25.11";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim";
+      # url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -37,6 +38,7 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     zen-nebula = {
       url = "github:JustAdumbPrsn/Nebula-A-Minimal-Theme-for-Zen-Browser";
     };
@@ -52,6 +54,28 @@
 
     agenix = {
       url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    niri = {
+      url = "github:LuckShiba/niri-flake/includes"; # temp dev branch for includes functionality
+      # url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # noctalia = {
+    #   url = "github:noctalia-dev/noctalia-shell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.quickshell.follows = "quickshell"; # Use same quickshell version
+    # };
+
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    danksearch = {
+      url = "github:AvengeMedia/danksearch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -80,8 +104,21 @@
     nixosConfigurations = {
       ares = nixpkgs.lib.nixosSystem {
         system = settings.system;
-        specialArgs = {inherit self inputs outputs;} // settings;
+        specialArgs =
+          {
+            inherit self inputs outputs;
+          }
+          // settings;
         modules = [./hosts/ares/configuration.nix];
+      };
+      xps = nixpkgs.lib.nixosSystem {
+        system = settings.system;
+        specialArgs =
+          {
+            inherit self inputs outputs;
+          }
+          // settings;
+        modules = [./hosts/xps/configuration.nix];
       };
     };
   };
