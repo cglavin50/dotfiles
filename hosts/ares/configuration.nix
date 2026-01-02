@@ -13,7 +13,7 @@
     # modules
     ../../modules/hardware/nvidia.nix
     ../../modules/programs/steam
-    ../../modules/programs/home-assistant
+    # ../../modules/programs/home-assistant
   ];
 
   # Use the systemd-boot EFI boot loader. Move to common?
@@ -21,15 +21,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   powerManagement.cpuFreqGovernor = "performance";
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
-  services.blueman.enable = true;
-
-  # security.pki.certificates = [
-  #   (builtins.readFile /home/cooper/caddy.crt) # trust Caddy intermediate cert
-  # ];
 
   # If on WiFi
   networking.networkmanager.enable = true;

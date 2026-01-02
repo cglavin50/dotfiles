@@ -67,13 +67,20 @@
       matugenScheme = "scheme-tonal-spot";
       runUserMatugenTemplates = true;
       blurWallpaperOnOverview = true;
+      syncModeWithPortal = true;
+      iconTheme = "System Default";
+      borderColor = "surfaceText";
+      widgetOutlineColor = "primary";
+      gtkThemingEnabled = false;
+      qtThemingEnabled = false;
+      terminalsAlwaysDark = true;
 
       # font
-
       fontFamily = "FiraCode Nerd Font";
       monoFontFamily = "JetBrainsMonoNL Nerd Font Propo";
 
       # dock config
+      showDock = true;
       dockAutoHide = true;
       dockGroupByApp = true;
       dockOpenOnOverview = true;

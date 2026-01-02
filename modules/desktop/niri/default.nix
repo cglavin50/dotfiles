@@ -1,10 +1,11 @@
 {
   config,
-  lib,
+  pkgs,
   ...
 }: {
   programs.niri = {
     settings = {
+      # Note - comment this out for first run, as dms hasn't created the styling files yet
       includes = [
         "./dms/alttab.kdl"
         "./dms/colors.kdl"
@@ -13,6 +14,44 @@
       ];
 
       prefer-no-csd = true;
+
+      cursor = {
+        theme = "Bibata-Modern-Ice";
+        hide-after-inactive-ms = 1000;
+        size = 24;
+      };
+
+      input = {
+        focus-follows-mouse.enable = true;
+        warp-mouse-to-focus.enable = true;
+        workspace-auto-back-and-forth = true;
+      };
+
+      outputs = {
+        DP-2 = {
+          focus-at-startup = true;
+          mode = {
+            height = 1440;
+            width = 2560;
+          };
+          scale = 1.25;
+          position = {
+            x = 0;
+            y = 0;
+          };
+        };
+        DP-3 = {
+          mode = {
+            height = 1080;
+            width = 1920;
+          };
+          scale = 1;
+          position = {
+            x = 2048; # using 1.25 scale
+            y = 0;
+          };
+        };
+      };
 
       spawn-at-startup = [
         {argv = ["obsidian"];}
@@ -75,6 +114,9 @@
         "Ctrl+J".action = focus-workspace-down;
         "Ctrl+K".action = focus-workspace-up;
 
+        "Ctrl+Semicolon".action = focus-monitor-left;
+        "Ctrl+Apostrophe".action = focus-monitor-right;
+
         "Ctrl+Shift+H".action = move-column-left;
         "Ctrl+Shift+L".action = move-column-right;
         "Ctrl+Shift+J".action = move-window-down;
@@ -95,4 +137,8 @@
       };
     };
   };
+
+  home.packages = with pkgs; [
+    bibata-cursors
+  ];
 }

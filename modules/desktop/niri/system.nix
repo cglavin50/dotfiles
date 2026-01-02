@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   programs.niri = {
     enable = true;
   };
@@ -8,4 +8,8 @@
     GDK_BACKEND = "wayland";
     MOZ_ENABLE_WAYLAND = "1";
   };
+
+  environment.systemPackages = with pkgs; [
+    xwayland-satellite
+  ];
 }

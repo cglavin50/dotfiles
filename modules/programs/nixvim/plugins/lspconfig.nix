@@ -33,9 +33,6 @@
             # For now, use typst-preview for preview features as it is not supported in nvim https://myriad-dreamin.github.io/tinymist/feature/preview.html#label-Neovim:
           };
         };
-        keymaps = {
-          ansiblels.enable = false;
-        };
       };
 
       # enable lsp-formatting on save

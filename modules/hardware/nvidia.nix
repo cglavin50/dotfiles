@@ -30,7 +30,7 @@
 
   environment.systemPackages = with pkgs; [
     glmark2
-    glxinfo
+    mesa-demos
   ];
 
   environment.sessionVariables = {

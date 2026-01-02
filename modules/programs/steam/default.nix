@@ -6,7 +6,7 @@
 
   environment.systemPackages = with pkgs; [
     mangohud # for fps monitoring
-    protonup # to install protonGE
+    protonup-ng # to install protonGE
   ];
 
   environment.sessionVariables = {

@@ -69,6 +69,8 @@ in {
     };
     # IMPORT OUR MODULES
     sharedModules = [
+      ../modules/programs/minecraft
+
       # ../modules/desktop/hyprland
       ../modules/desktop/niri
       inputs.niri.homeModules.niri
