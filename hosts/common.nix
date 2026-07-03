@@ -179,6 +179,8 @@ in {
         vlc
         mpv
 
+        claude-code
+
         zenity
 
         # misc
@@ -207,7 +209,7 @@ in {
         interception-tools
         interception-tools-plugins.caps2esc
 
-        bitwarden-desktop
+        # bitwarden-desktop # EOL electron_39, marked insecure
 
         # terminal
         alacritty # many wms use as default
