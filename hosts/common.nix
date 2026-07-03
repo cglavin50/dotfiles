@@ -18,7 +18,6 @@ in {
     ../modules/hardware/interception-tools/interception-tools.nix
     # ../modules/hardware/interception-tools/default.nix
     # ../modules/desktop/greetd
-    ../modules/desktop/dms/greeter.nix
     # ../modules/programs/flameshot
     ../modules/desktop/niri/system.nix
     ../modules/programs/thunar
@@ -82,9 +81,6 @@ in {
       ../modules/programs/nautilus
 
       ../modules/desktop/dms
-      inputs.dms.homeModules.dankMaterialShell.default
-      inputs.danksearch.homeModules.dsearch
-      inputs.dms.homeModules.dankMaterialShell.niri
 
       # ../modules/desktop/waybar
       ../modules/programs/tmux

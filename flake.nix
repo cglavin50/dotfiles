@@ -69,16 +69,6 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   inputs.quickshell.follows = "quickshell"; # Use same quickshell version
     # };
-
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    danksearch = {
-      url = "github:AvengeMedia/danksearch";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
