@@ -32,6 +32,7 @@
     plugins = with pkgs.tmuxPlugins; [
       resurrect
       continuum
+      sensible
       {
         plugin = catppuccin;
         extraConfig = ''

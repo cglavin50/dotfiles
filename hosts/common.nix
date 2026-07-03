@@ -3,6 +3,7 @@
   inputs,
   outputs,
   pkgs,
+  pkgs-unstable,
   username,
   browser,
   terminal,
@@ -164,6 +165,7 @@ in {
         unzip
 
         # networking
+        openssl
         nmap
         dnsutils
         ldns
@@ -191,6 +193,7 @@ in {
         usbutils
         ethtool
         sysstat
+        television
 
         fuzzel # launcher
 
@@ -214,6 +217,7 @@ in {
         ripgrep
         kubectl
         helm
+        pkgs-unstable.opencode
 
         clonehero
 

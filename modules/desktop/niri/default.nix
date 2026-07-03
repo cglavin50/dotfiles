@@ -22,7 +22,7 @@
       };
 
       input = {
-        focus-follows-mouse.enable = true;
+        # focus-follows-mouse.enable = true; # caused error when moving mouse across screens
         warp-mouse-to-focus.enable = true;
         workspace-auto-back-and-forth = true;
       };
@@ -114,8 +114,10 @@
         "Ctrl+J".action = focus-workspace-down;
         "Ctrl+K".action = focus-workspace-up;
 
-        "Ctrl+Semicolon".action = focus-monitor-left;
-        "Ctrl+Apostrophe".action = focus-monitor-right;
+        # "Ctrl+Semicolon".action = focus-monitor-left;
+        # "Ctrl+Apostrophe".action = focus-monitor-right;
+        "Ctrl+Alt+H".action = focus-monitor-left;
+        "Ctrl+Alt+L".action = focus-monitor-right;
 
         "Ctrl+Shift+H".action = move-column-left;
         "Ctrl+Shift+L".action = move-column-right;

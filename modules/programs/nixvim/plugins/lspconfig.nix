@@ -20,7 +20,10 @@
           tflint.enable = true;
           qmlls = {
             enable = true;
-            cmd = ["qmlls" "-E"];
+            cmd = [
+              "qmlls"
+              "-E"
+            ];
           };
           texlab.enable = true;
           gopls.enable = true;

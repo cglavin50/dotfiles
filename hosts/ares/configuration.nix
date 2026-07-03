@@ -30,7 +30,7 @@
 
   networking.hostName = hostname;
   networking.nameservers = [
-    # "192.168.1.10"
+    # "192.168.1.50"
     "1.1.1.1"
     "8.8.8.8"
   ]; # use homelab on this machine
