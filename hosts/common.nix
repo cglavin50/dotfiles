@@ -15,12 +15,15 @@
 in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    inputs.nvim.nixosModules.default
     ../modules/hardware/interception-tools/interception-tools.nix
     # ../modules/hardware/interception-tools/default.nix
     # ../modules/desktop/greetd
     # ../modules/programs/flameshot
     ../modules/desktop/niri/system.nix
     ../modules/programs/thunar
+
+    ../modules/desktop/dms/greeter.nix # not exposed to home manager
   ];
 
   users.users.${username} = {
@@ -80,12 +83,19 @@ in {
 
       ../modules/programs/nautilus
 
+      inputs.dms.homeModules.dank-material-shell # pass in dms homeManager module imported from flake
       ../modules/desktop/dms
+
+      inputs.omp.homeManagerModules.default
+      {
+          programs.omp.enable = true;
+      }
 
       # ../modules/desktop/waybar
       ../modules/programs/tmux
-      inputs.nixvim.homeModules.nixvim # pass in homeManager module so nixvim can access
-      ../modules/programs/nixvim
+      # ../modules/programs/nvim
+      # inputs.nixvim.homeModules.nixvim # pass in homeManager module so nixvim can access
+      # ../modules/programs/nixvim
       ../modules/programs/zsh
       inputs.matugen.nixosModules.default
       ../modules/programs/matugen
@@ -174,8 +184,13 @@ in {
         wf-recorder
         vlc
         mpv
+        pipewire
+
+        discord
 
         claude-code
+
+        # elmPackages
 
         zenity
 
@@ -195,10 +210,11 @@ in {
 
         fuzzel # launcher
 
-        # surely there's a better way to do this
         # inputs.quickshell.packages.${pkgs.system}.default
 
         tree-sitter
+
+      yazi
 
         papirus-icon-theme
 

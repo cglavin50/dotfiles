@@ -5,6 +5,7 @@
         enable = true;
 
         servers = {
+          elmls.enable = true;
           ts_ls.enable = true;
           pyright.enable = true;
           nil_ls = {

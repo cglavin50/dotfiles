@@ -10,9 +10,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dms-plugin-registry = {
+      url = "github:AvengeMedia/dms-plugin-registry";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixvim = {
       # url = "github:nix-community/nixvim";
       url = "github:nix-community/nixvim/nixos-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # my personal nvim config
+    nvim = {
+      url = "github:cglavin50/nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -69,6 +85,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   inputs.quickshell.follows = "quickshell"; # Use same quickshell version
     # };
+
+    omp = {
+        url = "github:nklmilojevic/omp-flake";
+    };
   };
 
   outputs = {

@@ -24,6 +24,13 @@
     extraConfig = ''
       include dank-tabs.conf
       include dank-theme.conf
+
+      # Allow ctrl+v to paste like ctrl+shift+v
+      map ctrl+v paste_from_clipboard
+
+      # Let apps (e.g. neovim's OSC52 clipboard provider) read/write the
+      # clipboard without a confirmation prompt on every access.
+      clipboard_control write-clipboard write-primary no-append read-clipboard read-primary
     '';
   };
 }
