@@ -15,7 +15,6 @@
 in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    inputs.nvim.nixosModules.default
     ../modules/hardware/interception-tools/interception-tools.nix
     # ../modules/hardware/interception-tools/default.nix
     # ../modules/desktop/greetd
@@ -93,9 +92,7 @@ in {
 
       # ../modules/desktop/waybar
       ../modules/programs/tmux
-      # ../modules/programs/nvim
-      # inputs.nixvim.homeModules.nixvim # pass in homeManager module so nixvim can access
-      # ../modules/programs/nixvim
+      inputs.nvim.homeModules.default
       ../modules/programs/zsh
       inputs.matugen.nixosModules.default
       ../modules/programs/matugen

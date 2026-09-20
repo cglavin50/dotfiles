@@ -20,13 +20,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      # url = "github:nix-community/nixvim";
-      url = "github:nix-community/nixvim/nixos-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # my personal nvim config
+    # my personal nvim config: provides a home-manager module only
+    # (homeModules.default). Plugins are pinned by vim.pack itself, not Nix.
     nvim = {
       url = "github:cglavin50/nvim";
       inputs.nixpkgs.follows = "nixpkgs";
