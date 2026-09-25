@@ -87,7 +87,7 @@ in {
 
       inputs.omp.homeManagerModules.default
       {
-          programs.omp.enable = true;
+        programs.omp.enable = true;
       }
 
       # ../modules/desktop/waybar
@@ -211,7 +211,7 @@ in {
 
         tree-sitter
 
-      yazi
+        yazi
 
         papirus-icon-theme
 

@@ -22,35 +22,40 @@
       };
 
       input = {
-        # focus-follows-mouse.enable = true; # caused error when moving mouse across screens
         warp-mouse-to-focus.enable = true;
         workspace-auto-back-and-forth = true;
       };
 
       outputs = {
-        DP-2 = {
+        "ASUSTek COMPUTER INC ASUS VG34V W5LMTF038352" = {
           focus-at-startup = true;
           mode = {
             height = 1440;
-            width = 2560;
+            width = 3440;
+            # niri matches refresh to the exact 3 decimals reported by
+            # `niri msg outputs`. This monitor enumerates 164.999, not
+            # 165.0 - the old value silently fell back to the panel's
+            # 60Hz "preferred" mode on every reconnect.
+            refresh = 164.999;
           };
-          scale = 1.25;
+          scale = 1.00;
+          variable-refresh-rate = false; # temporarily off to isolate flicker cause
           position = {
             x = 0;
             y = 0;
           };
         };
-        DP-3 = {
-          mode = {
-            height = 1080;
-            width = 1920;
-          };
-          scale = 1;
-          position = {
-            x = 2048; # using 1.25 scale
-            y = 0;
-          };
-        };
+        # DP-3 = {
+        #   mode = {
+        #     height = 1080;
+        #     width = 1920;
+        #   };
+        #   scale = 1;
+        #   position = {
+        #     x = 2048; # using 1.25 scale
+        #     y = 0;
+        #   };
+        # };
       };
 
       spawn-at-startup = [
@@ -74,9 +79,25 @@
           clip-to-geometry = true;
         }
         {
-          # force obsidian in top workspace
+          # obsidian: pin to workspace 1, but don't let notes sprawl
+          # across the full 3440px - ~60% reads like a comfortable page.
           matches = [{app-id = "obsidian";}];
           open-on-workspace = "1";
+          default-column-width.proportion = 0.6;
+        }
+        {
+          # terminals: a single kitty/tmux column rarely needs more
+          # than ~40% of an ultrawide; leaves room to scroll in a
+          # browser or second terminal alongside it.
+          matches = [{app-id = "kitty";}];
+          default-column-width.proportion = 0.4;
+        }
+        {
+          # zen browser: verify the real app-id with `niri msg windows`
+          # after first launch (Firefox forks sometimes report
+          # "zen-alpha" or "zen-twilight" instead of "zen").
+          matches = [{app-id = "^[Zz]en.*";}];
+          default-column-width.proportion = 0.55;
         }
       ];
 
@@ -94,7 +115,29 @@
 
       layout = {
         background-color = "transparent";
-        default-column-width.proportion = 1.0;
+        # fallback for anything without an explicit rule above - half
+        # width lets two columns share the screen by default instead
+        # of every window claiming the whole ultrawide.
+        default-column-width.proportion = 0.5;
+        # quick-cycle sizes for Super+R below: third / half / two-thirds
+        preset-column-widths = [
+          {proportion = 0.33;}
+          {proportion = 0.5;}
+          {proportion = 0.67;}
+          {proportion = 1.0;}
+        ];
+        # keep the active column centered once columns overflow the
+        # screen width, instead of it hugging whichever edge you
+        # scrolled from - much nicer on a wide monitor than the
+        # default edge-anchored scroll.
+        center-focused-column = "on-overflow";
+        # a lone window on a workspace centers itself instead of
+        # sitting flush against the left edge; the moment a second
+        # column shows up, this stops applying and center-focused-column
+        # above takes over (on-overflow: side-by-side unless they don't
+        # both fit).
+        always-center-single-column = true;
+        gaps = 12;
       };
 
       binds = with config.lib.niri.actions; let
@@ -114,11 +157,6 @@
         "Ctrl+J".action = focus-workspace-down;
         "Ctrl+K".action = focus-workspace-up;
 
-        # "Ctrl+Semicolon".action = focus-monitor-left;
-        # "Ctrl+Apostrophe".action = focus-monitor-right;
-        "Ctrl+Alt+H".action = focus-monitor-left;
-        "Ctrl+Alt+L".action = focus-monitor-right;
-
         "Ctrl+Shift+H".action = move-column-left;
         "Ctrl+Shift+L".action = move-column-right;
         "Ctrl+Shift+J".action = move-window-down;
@@ -128,6 +166,19 @@
         "Super+Equal".action = set-column-width "+10%";
         "Super+Shift+Minus".action = set-window-height "-10%";
         "Super+Shift+Equal".action = set-window-height "+10%";
+
+        # cycle a column through the preset-column-widths above -
+        # fast way to go terminal-narrow -> half -> browser-wide.
+        "Super+R".action = switch-preset-column-width;
+        "Super+Shift+F".action = maximize-column;
+        "Super+C".action = center-column;
+
+        # pull the neighboring column into this one as a second tile,
+        # or kick the focused tile back out into its own column - lets
+        # you stack e.g. two terminals side-by-side within one column
+        # slot instead of always scrolling horizontally.
+        "Ctrl+Alt+Shift+H".action = consume-or-expel-window-left;
+        "Ctrl+Alt+Shift+L".action = consume-or-expel-window-right;
 
         "Super+Shift+S".action = sh "dms screenshot";
         "Super+T".action = sh "dms ipc call dash toggle \"media\"";
